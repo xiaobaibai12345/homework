@@ -1,4 +1,4 @@
-2. 生态学上常用树模型，包括随机森林、提升回归树。建模步骤包括：数据预处理、拆分数据集、选择特征、算法和训练模型、模型评估等。caret为各种机器学习算法提供了统一模板，加载mtcars数据集，请根据问题填空。
+#问题：2. 生态学上常用树模型，包括随机森林、提升回归树。建模步骤包括：数据预处理、拆分数据集、选择特征、算法和训练模型、模型评估等。caret为各种机器学习算法提供了统一模板，加载mtcars数据集，请根据问题填空。
 1）对于doubs中的鱼群数据，按照样地，计算各样地鱼类Shannon多样性指数，并新增biodiv列。
 
 # 安装并加载必要的包  
@@ -21,16 +21,16 @@ doubs_diversity <- data.frame(
 # 查看结果  
 print(doubs_diversity)  
 
-2）利用train()，训练随机森林（randomForest）模型
+#问题：2）利用train()，训练随机森林（randomForest）模型
 model_rf <- train(biodiv ~ .,  data = training_data,  method = "    __") 
-3）通过trainControl()，向train()添加重采样10-fold cross-validation，以优化参数
+#问题：3）通过trainControl()，向train()添加重采样10-fold cross-validation，以优化参数
            fitControl <- trainControl(method = "          ",  number = 10, repeats = 5)
 model_rf <- train(biodiv ~ ., data = training_data, method = "    ", trControl =fitControl) 
-4）在train()中，增加中心化和标准化等数据预处理，提高模型精度
+#问题：4）在train()中，增加中心化和标准化等数据预处理，提高模型精度
 model_rf <- train(biodiv ~ ., data = training_data,  method = "    ", 
 preProcess = c('scale', 'center'),
 trControl =fitControl)
-5）rf有mtry和tree两个参数，可以通过expand.grid()设置调优，并在train()添加
+#问题：5）rf有mtry和tree两个参数，可以通过expand.grid()设置调优，并在train()添加
 grid <- expand.grid(.mtry=c(1:10))
 model_rf <- train(biodiv ~ ., data = training_data, method = "    ",
 preProcess = c('scale', 'center'),
