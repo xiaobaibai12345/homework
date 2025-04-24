@@ -35,7 +35,7 @@ grid <- expand.grid(.mtry=c(1:10))
 model_rf <- train(biodiv ~ ., data = training_data, method = "    ",
 preProcess = c('scale', 'center'),
 trControl =fitControl,
-_________ =  ________)
+# _________ =  ________)
 
 
 
