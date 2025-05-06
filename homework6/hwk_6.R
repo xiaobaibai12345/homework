@@ -3,9 +3,6 @@
 url_csv <- "https://raw.githubusercontent.com/dataprofessor/data/master/iris.csv"  
 iris_data <- read.csv(url_csv)  
 
-# 检查数据  
-head(iris_data)  
-summary(iris_data) 
 
 #2 使用 HTTP 库（如 httr）调用 Web API 
 install.packages("httr")  
@@ -33,9 +30,7 @@ webpage <- read_html(url_page)
 # 假设需要抓取第一个表格  
 table_nodes <- html_nodes(webpage, "table")  
 population_table <- html_table(table_nodes[[1]], fill = TRUE)  
-
-# 查看爬取的表格数据  
-head(population_table)  
+  
 
 
 ### API 端点指的是什么？
@@ -48,16 +43,18 @@ head(population_table)
 install.packages("RSQLite")  
 
 # 加载 DBI 和 RSQLite  
-library(DBI)  
-library(RSQLite)
-library(dplyr)  
+library(DBI)  #R中用于连接数据库的通用接口
+library(RSQLite) #R里连接 SQLite 数据库的具体实现
+library(dplyr)  #用于数据操作的包（和数据库无缝集成）函数的库
 
+#1）首先利用dplyr包src_sqlite()创建空的SQLite
 #其中 create = TRUE 表示若数据库文件不存在则新建。
-mydb <- src_sqlite("dbname.sqlite", create = TRUE)  
+mydb <- src_sqlite("dbname.sqlite", create = TRUE)  #创造空文件mydb
 # 接着利用 copy_to() 将 CSV 文件上传到 SQLite
-env <- read.csv("data/env.csv")  
-copy_to(mydb, env) 
-mydb <- src_sqlite("dbname.sqlite")  
+env <- read.csv("data/env.csv")  #里面含有数据
+copy_to(mydb, env) #将env里面的数据copy到mydb里面
+
+mydb <- src_sqlite("dbname.sqlite")  #读取mydb里面的数据
 env <- tbl(mydb, "env")  #先用 src_sqlite(...) 连接现有数据库，然后用 tbl() 指定想要操作的表名。
 
 
